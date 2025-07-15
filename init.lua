@@ -1,16 +1,19 @@
+-- Leader Keys
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Import lazy
 require("config.lazy")
 
-vim.cmd[[colorscheme dark_flat]]
+-- Colorscheme
+vim.cmd[[colorscheme default]]
 
+-- Nvim options
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.clipboard = "unnamedplus"
 
 -- Set other options as needed
-
 vim.cmd [[
   highlight Normal guibg=NONE ctermbg=NONE
   highlight NormalNC guibg=NONE ctermbg=NONE
@@ -18,6 +21,7 @@ vim.cmd [[
 
 -- Tree
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
+
 -- Map Ctrl + S to save the current file
 vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true }) -- Normal mode
 vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a', { noremap = true, silent = true }) -- Insert mode
@@ -46,7 +50,7 @@ vim.keymap.set("n", "<leader>lv", ":VimtexView<CR>", { desc = "View PDF" })
 vim.keymap.set('n', '<Leader>bn', ':bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<Leader>bp', ':bprevious<CR>', { desc = 'Previous buffer' })
 vim.keymap.set('n', '<Leader>bc', ':bd<CR>', { desc = 'Close buffer' })
-vim.keymap.set('n', '<Leader>bo', ':enew<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<Leader>bo', ':enew<CR>', { desc = 'New buffer' })
 
 -- Splits
 vim.keymap.set('n', '<Leader>sh', ':split<CR>', { desc = 'Horizontal split' })
@@ -57,12 +61,12 @@ vim.keymap.set("n", "<C-h>", "<cmd>TmuxNavigateLeft<CR>", { silent = true })
 vim.keymap.set("n", "<C-j>", "<cmd>TmuxNavigateDown<CR>", { silent = true })
 vim.keymap.set("n", "<C-k>", "<cmd>TmuxNavigateUp<CR>", { silent = true })
 vim.keymap.set("n", "<C-l>", "<cmd>TmuxNavigateRight<CR>", { silent = true })
+
 -- Resize Splits
 vim.keymap.set('n', '<Leader>+', ':resize +5<CR>', { desc = 'Increase split height' })
 vim.keymap.set('n', '<Leader>_', ':resize -5<CR>', { desc = 'Decrease split height' })
 vim.keymap.set('n', '<Leader>-', ':vertical resize -5<CR>', { desc = 'Decrease split width' })
 vim.keymap.set('n', '<Leader>=', ':vertical resize +5<CR>', { desc = 'Increase split width' })
-
 
 --- Obsidian
 vim.keymap.set('n', '<Leader>og', function()
@@ -102,8 +106,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-
-
 -- LuaSnip
 -- In your init.lua or a separate snippets.lua file
 require("luasnip").setup({
@@ -128,7 +130,6 @@ vim.keymap.set({"i", "s"}, "<S-Tab>", function()
     return "<S-Tab>"
   end
 end, {expr = true})
-
 
 --- Move File
 vim.keymap.set("n", "<leader>fm", function()
