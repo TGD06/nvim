@@ -2,11 +2,14 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
+-- Swap File
+vim.o.swapfile = false
+
 -- Import lazy
 require("config.lazy")
 
--- Colorscheme
-vim.cmd[[colorscheme default]]
+-- colorscheme
+vim.cmd[[colorscheme nord]]
 
 -- Nvim options
 vim.opt.number = true
@@ -30,16 +33,10 @@ vim.keymap.set('v', '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true }) -
 -- Shift Q quit nvim
 vim.keymap.set("n", "Q", ":q<CR>", { desc = "Quit Neovim" })
 
--- Navigate to the next tab
+-- Tabs
 vim.keymap.set("n", "<leader>tn", ":tabnext<CR>", { desc = "Next Tab" })
-
--- Navigate to the previous tab
 vim.keymap.set("n", "<leader>tp", ":tabprevious<CR>", { desc = "Previous Tab" })
-
--- Close the current tab
 vim.keymap.set("n", "<leader>tc", ":tabclose<CR>", { desc = "Close Tab" })
-
--- Open a new tab
 vim.keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "Open New Tab" })
 
 -- Vimtex
@@ -84,16 +81,12 @@ vim.keymap.set('n', '<Leader>of', function()
 end, { desc = "Find Obsidian Note" })
 
 vim.keymap.set("n", "<leader>ot", ":ObsidianTemplate<CR>", { desc = "Insert Obsidian template" })
-
 vim.keymap.set("n", "<leader>on", ":ObsidianNew<CR>", { desc = "New Note Title" })
-
 vim.keymap.set("n", "<leader>oo", ":ObsidianOpen<CR>", { desc = "Open Note in obsidian" })
-
 vim.keymap.set("n", "<leader>od", ":ObsidianToday<CR>", { desc = "Daily Note" })
 
 
 -- CS 149 additions
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "python",
     callback = function()
@@ -107,67 +100,26 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- LuaSnip
--- In your init.lua or a separate snippets.lua file
 require("luasnip").setup({
   history = true,
   updateevents = "TextChanged,TextChangedI",
 })
 
--- Optional: Load friendly-snippets
-require("luasnip.loaders.from_vscode").lazy_load()
-vim.keymap.set({"i", "s"}, "<Tab>", function()
-  if require("luasnip").expand_or_jumpable() then
-    return "<Plug>luasnip-expand-or-jump"
-  else
-    return "<Tab>"
-  end
-end, {expr = true})
-
-vim.keymap.set({"i", "s"}, "<S-Tab>", function()
-  if require("luasnip").jumpable(-1) then
-    return "<Plug>luasnip-jump-prev"
-  else
-    return "<S-Tab>"
-  end
-end, {expr = true})
-
---- Move File
-vim.keymap.set("n", "<leader>fm", function()
-  -- Get the current file name without path
-  local current_file = vim.fn.expand("%:t")
-  
-  -- Get the current working directory (where nvim was opened)
-  local cwd = vim.fn.getcwd() .. "/"
-  
-  -- Use vim.ui.input with default value being the current directory
-  vim.ui.input({ 
-    prompt = "Move to folder: ", 
-    default = cwd,
-    completion = "dir" -- Enable directory path completion
-  }, function(destination)
-    if destination then
-      -- Ensure destination has trailing slash
-      if not destination:match("/$") then
-        destination = destination .. "/"
-      end
-      
-      -- Get full path of current file
-      local current_path = vim.fn.expand("%:p")
-      
-      -- Build the full destination path
-      local target_path = destination .. current_file
-      
-      -- Execute the move using vim's rename function
-      local success, err = os.rename(current_path, target_path)
-      
-      if success then
-        -- Open the moved file
-        vim.cmd("edit " .. target_path)
-        vim.notify("File moved to " .. target_path, vim.log.levels.INFO)
-      else
-        vim.notify("Failed to move file: " .. (err or "unknown error"), vim.log.levels.ERROR)
-      end
+-- Auto move help windows to a vertical split on the right
+vim.api.nvim_create_autocmd("BufEnter", {
+  pattern = "*.txt",
+  callback = function()
+    if vim.bo.filetype == "help" then
+      vim.cmd("wincmd L") -- move help window to far right
     end
-  end)
-end, { desc = "Move current file to different folder" })
+  end,
+})
 
+-- Spell Check
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "markdown", "tex", "typst" },
+  callback = function()
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = { "en_us" }
+  end,
+})
