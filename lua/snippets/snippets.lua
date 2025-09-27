@@ -10,10 +10,11 @@ ls.add_snippets("all", {
   s("date", { t(os.date("%Y-%m-%d")) }),
   })
 
-ls.add_snippets("md", {
+-- md
+ls.add_snippets("markdown", {
   -- Markdown Snippet for LaTeX notes
   s("hl", { t("=="), i(1, "text"), t("==") }),
-  s("bf", { t("**"), i(1, "text"), t("**") }),
+  s("bf", { t("**"), i(1, "text"), t("**"), i(0) }),
   s("it", { t("*"), i(1, "text"), t("*") }),
   s("mt", { t("$"), i(1, "equation"), t("$") }),
   s("block", { t("$$"), t({"", ""}), i(1, "equation"), t({"", "$$"}) }),
@@ -34,7 +35,8 @@ ls.add_snippets("md", {
 
 })
 
-ls.add_snippets("tex", {
+--tex
+ls.add_snippets("latex", {
   -- Bold text
   s("bf", {
     t("\\textbf{"),
@@ -71,3 +73,21 @@ ls.add_snippets("tex", {
     t("}"),
   }),
 })
+
+--typ
+ls.add_snippets("typst", {
+
+  s("bf", { t("* "), i(1, "text"), t(" *") }),
+  s("mt", { t("$ "), i(1, "equation"), t(" $") }),
+  s("block", { t("$"), t({"", ""}), i(1, "equation"), t({"", "$"}) }),
+
+
+  s("enum", { t('#set enum(numbering: "'), i(1, 'a)'), t({'")'}), }),
+
+
+})
+
+
+
+
+
