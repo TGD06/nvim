@@ -77,17 +77,13 @@ ls.add_snippets("latex", {
 --typ
 ls.add_snippets("typst", {
 
-  s("bf", { t("* "), i(1, "text"), t(" *") }),
-  s("mt", { t("$ "), i(1, "equation"), t(" $") }),
+  s("bf", { t("*"), i(1, "text"), t("*") }),
+  s("mt", { t("$"), i(1, "equation"), t("$") }),
+  s("it", { t("_"), i(1, "text"), t("_") }),
+  s("linebreak", { t("#line(length: 100%)") }),
   s("block", { t("$"), t({"", ""}), i(1, "equation"), t({"", "$"}) }),
 
-
-  s("enum", { t('#set enum(numbering: "'), i(1, 'a)'), t({'")'}), }),
-
+  s("enum", { t('#set enum(numbering: "'), i(1, 'a)'), t({'", start: '}), i(2, '1'), t({')'}) }),
 
 })
-
-
-
-
 

@@ -22,6 +22,19 @@ vim.cmd [[
   highlight NormalNC guibg=NONE ctermbg=NONE
 ]]
 
+-- Disable line wrap globally by default
+vim.opt.wrap = false
+
+-- Enable line wrap for specific file types
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "typst", "markdown", "tex", "latex", "plaintex" },
+  callback = function()
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true  -- Break at word boundaries
+    vim.opt_local.breakindent = true  -- Preserve indentation in wrapped lines
+  end,
+})
+
 -- Tree
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
 
@@ -36,6 +49,10 @@ vim.keymap.set('v', '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true }) -
 vim.keymap.set("n", "Q", ":q<CR>", { desc = "Quit Neovim" })
 
 -----------------------------------------------------------------------------------------------------
+-- Telescope Current Buffer
+vim.keymap.set('n', '<leader>/', ':Telescope current_buffer_fuzzy_find<CR>', { desc = 'Fuzzy find in current buffer' })
+----------------------------------------------------------------------------------------------------
+
 
 -- Tabs
 vim.keymap.set("n", "<leader>tn", ":tabnext<CR>", { desc = "Next Tab" })
@@ -49,6 +66,13 @@ vim.keymap.set("n", "<leader>to", ":tabnew<CR>", { desc = "Open New Tab" })
 vim.keymap.set("n", "<leader>lc", ":VimtexCompile<CR>", { desc = "Compile LaTeX" })
 vim.keymap.set("n", "<leader>lv", ":VimtexView<CR>", { desc = "View PDF" })
 
+-----------------------------------------------------------------------------------------------------
+
+-- Zathura 
+vim.keymap.set("n", "<leader>lz", function()
+  local pdf = vim.fn.expand("%:r") .. ".pdf"
+  vim.fn.jobstart({"zathura", pdf}, {detach = true})
+end, { desc = "Open PDF in Zathura" })
 -----------------------------------------------------------------------------------------------------
 
 -- Buffer Navigation
@@ -103,7 +127,7 @@ vim.keymap.set("n", "<leader>od", ":ObsidianToday<CR>", { desc = "Daily Note" })
 
 -----------------------------------------------------------------------------------------------------
 
--- CS 149 additions
+-- CS 149 Python additions
 vim.api.nvim_create_autocmd("FileType", {
     pattern = "python",
     callback = function()
@@ -116,6 +140,20 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-----------------------------------------------------------------------------------------------------
+
+-- cpp
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {"cpp", "c", "h", "hpp"},
+    callback = function()
+        vim.bo.expandtab = true      -- Use spaces instead of tabs
+        vim.bo.tabstop = 2           -- clang-format default is 2 spaces
+        vim.bo.shiftwidth = 2        -- Number of spaces for autoindent
+        vim.bo.softtabstop = 2       -- Number of spaces when pressing <Tab>
+        vim.opt.textwidth = 100      -- C++ lines can be longer
+        vim.opt.colorcolumn = "100"  -- Show column guide at 100
+    end,
+})
 -----------------------------------------------------------------------------------------------------
 
 -- LuaSnip
