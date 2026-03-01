@@ -84,6 +84,10 @@ ls.add_snippets("typst", {
   s("block", { t("$"), t({"", ""}), i(1, "equation"), t({"", "$"}) }),
 
   s("enum", { t('#set enum(numbering: "'), i(1, 'a)'), t({'", start: '}), i(2, '1'), t({')'}) }),
+  s({trig = "dpdt", name = "dP/dt", wordTrig = true},{ t({ "(d P)/(d t)" }) }),
+  s({trig = "dxdt", name = "dx/dt"}, { t({ "(d x)/(d t)" }) } ),
+  s({trig = "dydt", name = "dx/dt"}, { t({ "(d y)/(d t)" }) } ),
+  s({trig = "int", name = "integral"}, { t({ "integral" }) } ),
+  s({trig = "dd", name = "dif (proper differential)"}, { t("dif") } ),
 
 })
-

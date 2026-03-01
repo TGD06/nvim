@@ -9,7 +9,8 @@ vim.o.swapfile = false
 require("config.lazy")
 
 -- colorscheme
-vim.cmd[[colorscheme nord]]
+vim.cmd[[colorscheme xcodewwdc]]
+vim.opt.termguicolors = true
 
 -- Nvim options
 vim.opt.number = true
@@ -20,6 +21,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.cmd [[
   highlight Normal guibg=NONE ctermbg=NONE
   highlight NormalNC guibg=NONE ctermbg=NONE
+  highlight Conceal guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 ]]
 
 -- Disable line wrap globally by default
@@ -73,7 +75,13 @@ vim.keymap.set("n", "<leader>lz", function()
   local pdf = vim.fn.expand("%:r") .. ".pdf"
   vim.fn.jobstart({"zathura", pdf}, {detach = true})
 end, { desc = "Open PDF in Zathura" })
+
+-- Typst Compile
+vim.keymap.set("n", "<leader>lc", function()
+  vim.cmd("!typst compile %")
+end, { desc = "Typst Compile Current File" })
 -----------------------------------------------------------------------------------------------------
+
 
 -- Buffer Navigation
 vim.keymap.set('n', '<Leader>bn', ':bnext<CR>', { desc = 'Next buffer' })
@@ -209,4 +217,3 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spelllang = { "en_us" }
   end,
 })
-
