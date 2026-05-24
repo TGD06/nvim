@@ -3,7 +3,7 @@ vim.pack.add({
   'https://github.com/arcticicestudio/nord-vim',
   'https://github.com/lunacookies/vim-colors-xcode', 
 
-  -- Completion (swap these out if moving to blink.cmp)
+  -- Autocompletion 
   'https://github.com/hrsh7th/nvim-cmp',
   'https://github.com/hrsh7th/cmp-nvim-lsp',
   'https://github.com/hrsh7th/cmp-buffer',
@@ -39,7 +39,7 @@ vim.pack.add({
 -- load plugin configs
 require('plugins.telescope')
 require('plugins.nvim-tree')
-require('plugins.cmp')          -- or blink if switching
+require('plugins.cmp')
 require('plugins.luasnip')
 require('plugins.obsidian')
 require('plugins.tmuxnav')
