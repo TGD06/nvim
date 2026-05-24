@@ -1,4 +1,3 @@
-
 -- Tree
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
 
@@ -14,7 +13,12 @@ vim.keymap.set("n", "Q", ":q<CR>", { desc = "Quit Neovim" })
 
 -----------------------------------------------------------------------------------------------------
 -- Telescope Current Buffer
-vim.keymap.set('n', '<leader>/', ':Telescope current_buffer_fuzzy_find<CR>', { desc = 'Fuzzy find in current buffer' })
+vim.keymap.set('n', '<leader>fg', ':Telescope current_buffer_fuzzy_find<CR>', { desc = 'Fuzzy find in current buffer' })
+
+vim.keymap.set('n', '<leader>ff', function()
+  require('telescope.builtin').live_grep()
+end, { desc = 'Live grep' })
+
 ----------------------------------------------------------------------------------------------------
 
 -- Tabs
@@ -67,25 +71,35 @@ vim.keymap.set('n', '<Leader>=', ':vertical resize +5<CR>', { desc = 'Increase s
 
 -----------------------------------------------------------------------------------------------------
 
---- Obsidian
-vim.keymap.set('n', '<Leader>og', function()
-  require('telescope.builtin').live_grep({
-    prompt_title = "Search Obsidian Vault",
-    cwd = vim.fn.expand("~/Obsidian/notes"), -- Replace with your vault path
-  })
-end, { desc = "Search Obsidian Vault" })
-
-vim.keymap.set('n', '<Leader>of', function()
-  require('telescope.builtin').find_files({
-    prompt_title = "Find Obsidian Note",
-    cwd = vim.fn.expand("~/Obsidian/notes"), -- Replace with your vault path
-  })
-end, { desc = "Find Obsidian Note" })
-
+-- Obsidian
 vim.keymap.set("n", "<leader>ot", ":ObsidianTemplate<CR>", { desc = "Insert Obsidian template" })
 vim.keymap.set("n", "<leader>on", ":ObsidianNew<CR>", { desc = "New Note Title" })
 vim.keymap.set("n", "<leader>oo", ":ObsidianOpen<CR>", { desc = "Open Note in obsidian" })
 vim.keymap.set("n", "<leader>od", ":ObsidianToday<CR>", { desc = "Daily Note" })
+
+vim.keymap.set('n', '<leader>ii', function()
+  require('telescope.builtin').find_files({
+    prompt_title = "Insert Image",
+    cwd = vim.fn.expand("~/Obsidian/notes/bin/pics/"),
+    attach_mappings = function(prompt_bufnr, map)
+      map('i', '<CR>', function()
+        local selection = require('telescope.actions.state').get_selected_entry()
+        require('telescope.actions').close(prompt_bufnr)
+        local filename = selection.value
+        local insert = string.format("![%s](bin/pics/%s)", filename, filename)
+        vim.api.nvim_put({insert}, 'c', true, true)
+      end)
+      return true
+    end,
+  })
+end, { desc = "Insert image from vault" })
+
+vim.keymap.set('n', '<leader>wi', function()
+  local url = vim.fn.getreg('+')  -- get clipboard
+  local name = vim.fn.input('Image name: ')
+  local insert = string.format('![%s](%s)', name, url)
+  vim.api.nvim_put({insert}, 'c', true, true)
+end, { desc = "Paste image from clipboard as markdown" })
 
 -----------------------------------------------------------------------------------------------------
 -- LuaSnip

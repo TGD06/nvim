@@ -10,9 +10,6 @@ ls.add_snippets("all", {
   s("date", { t(os.date("%Y-%m-%d")) }),
   })
 
--- md
-
-
 --tex
 ls.add_snippets("latex", {
   -- Bold text
@@ -99,12 +96,5 @@ ls.add_snippets("markdown", {
   s({trig = "dd", name = "dif (proper differential)"}, { t("dif") } ),
   s({trig = "pb", name = "pagebreak"}, { t("#pagebreak()") } ),
   s({trig = "frac", name = "fraction"}, { t("("), i(1, ""), t(")"), t("/("), i(2, ""), t(")") }),
-  s({trig = "img", name = "image from web"}, {t('!['),i(1, "name"),t(']('),i(2, "website"),t(')')}),
 
-  s("img", {
-    t("!["), i(1, "alt text"), t("]("),
-    i(2, "path/to/image.png"),
-    t(")"),
-    i(0),
-  }),
 })
