@@ -1,7 +1,7 @@
 -- Tree
 vim.keymap.set('n', '<leader>e', ':NvimTreeToggle<CR>')
 
--- Map Ctrl + S to save the current file
+-- Ctrl + S to save the current file
 vim.keymap.set('n', '<C-s>', ':w<CR>', { noremap = true, silent = true }) -- Normal mode
 vim.keymap.set('i', '<C-s>', '<Esc>:w<CR>a', { noremap = true, silent = true }) -- Insert mode
 vim.keymap.set('v', '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true }) -- Visual mode
@@ -12,9 +12,10 @@ vim.keymap.set('v', '<C-s>', '<Esc>:w<CR>', { noremap = true, silent = true }) -
 vim.keymap.set("n", "Q", ":q<CR>", { desc = "Quit Neovim" })
 
 -----------------------------------------------------------------------------------------------------
--- Telescope Current Buffer
-vim.keymap.set('n', '<leader>fg', ':Telescope current_buffer_fuzzy_find<CR>', { desc = 'Fuzzy find in current buffer' })
+-- Telescope current directory
+vim.keymap.set('n', '<leader>fg', ':Telescope current_buffer_fuzzy_find<CR>', { desc = 'Live grep' })
 
+-- Telescope current buffer
 vim.keymap.set('n', '<leader>ff', function()
   require('telescope.builtin').live_grep()
 end, { desc = 'Live grep' })

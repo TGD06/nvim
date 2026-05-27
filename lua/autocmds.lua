@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- Python indentation
+-- Python Formatting
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "python",
   callback = function()
@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
--- C/C++ indentation
+-- C/C++ Formatting
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "cpp", "c", "h", "hpp" },
   callback = function()
@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
   end,
 })
 
--- Spell check for writing filetypes
+-- Spell check for documents
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "markdown", "tex", "typst" },
   callback = function()
