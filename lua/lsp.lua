@@ -10,13 +10,13 @@ vim.lsp.config("clangd", {
 vim.lsp.enable("clangd")
 
 -- ── Python ─────────────────────────────────────────────────────────────────
-vim.lsp.config("basedpyright", {
+vim.lsp.config("pyright", {
   capabilities = capabilities,
-  cmd = { "basedpyright-langserver", "--stdio" },
+  cmd = { "pyright-langserver", "--stdio" },
   filetypes = { "python" },
   root_markers = { "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", ".git" },
 })
-vim.lsp.enable("basedpyright")
+vim.lsp.enable("pyright")
 
 -- ── Lua ────────────────────────────────────────────────────────────────────
 vim.lsp.config("lua_ls", {
@@ -83,6 +83,26 @@ vim.lsp.config("cssls", {
 })
 vim.lsp.enable("cssls")
 
+-- ── MATLAB ─────────────────────────────────────────────────────────────────
+vim.lsp.config("matlab_ls", {
+  capabilities = capabilities,
+  cmd = {
+    "node",
+    vim.fn.expand("~/.local/share/MATLAB-language-server/out/index.js"),
+    "--stdio",
+  },
+  filetypes = { "matlab" },
+  root_markers = { ".git", "." },
+  settings = {
+    MATLAB = {
+      indexWorkspace = true,
+      installPath = "/Applications/MATLAB_R2024a.app", -- adjust to your MATLAB.app path
+      matlabConnectionTiming = "never",
+    },
+  },
+})
+vim.lsp.enable("matlab_ls")
+
 -- ── Keymaps (attach per buffer when LSP connects) ─────────────────────────
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
@@ -98,5 +118,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
     map("n", "<leader>d",  vim.diagnostic.open_float,  { buffer = buf, desc = "Open diagnostic" })
     map("n", "[d",         vim.diagnostic.goto_prev,   { buffer = buf, desc = "Prev diagnostic" })
     map("n", "]d",         vim.diagnostic.goto_next,   { buffer = buf, desc = "Next diagnostic" })
-  end,
+    end,
 })

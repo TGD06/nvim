@@ -33,7 +33,6 @@ vim.pack.add({
 
   -- Writing / notes
   'https://github.com/epwalsh/obsidian.nvim',
-  'https://github.com/lervag/vimtex',
 })
 
 -- load plugin configs
