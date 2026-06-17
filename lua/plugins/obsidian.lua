@@ -1,7 +1,7 @@
 require("obsidian").setup({
   completion = {
-	  nvim_cmp = true,
-	  min_chars = 2,
+    nvim_cmp = true,
+    min_chars = 2,
   },
   dir = "~/Obsidian/notes/",
   templates = {
@@ -13,6 +13,12 @@ require("obsidian").setup({
   },
   notes_subdir = "bin",
   new_notes_location = "notes_subdir",
+
+  -- Open URLs in Brave browser
+  follow_url_func = function(url)
+    vim.fn.jobstart({ "open", "-a", "Brave Browser", url })
+  end,
+
   note_frontmatter_func = function(note)
     local out = {}
     if note.metadata then

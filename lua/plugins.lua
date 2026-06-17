@@ -1,7 +1,7 @@
 vim.pack.add({
   -- Colorschemes
   'https://github.com/arcticicestudio/nord-vim',
-  'https://github.com/lunacookies/vim-colors-xcode', 
+  'https://github.com/lunacookies/vim-colors-xcode',
 
   -- Autocompletion 
   'https://github.com/hrsh7th/nvim-cmp',
@@ -44,3 +44,4 @@ require('plugins.obsidian')
 require('plugins.tmuxnav')
 require('plugins.autoclose')
 require('plugins.nvim-surround')
+

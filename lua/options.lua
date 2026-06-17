@@ -16,9 +16,9 @@ vim.opt.conceallevel = 1
 
 vim.opt.wrap = false
 
-vim.cmd[[colorscheme xcodedark]]
+vim.cmd[[colorscheme xcodedarkhc]]
 
-require('vim._core.ui2').enable({})   
+require('vim._core.ui2').enable({})
 
 -- Set background to same as terminal background
 vim.cmd [[

@@ -71,6 +71,10 @@
     "vimtex": {
       "rev": "182ad387e3f3107699483606c9a2b6648f8437b2",
       "src": "https://github.com/lervag/vimtex"
+    },
+    "xterm256.nvim": {
+      "rev": "237b55c800fddb54368863e9ea03efc03932b760",
+      "src": "https://github.com/rubocode/xterm256.nvim"
     }
   }
 }
