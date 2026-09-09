@@ -24,9 +24,15 @@ require('vim._core.ui2').enable({})
 vim.cmd [[
   highlight Normal guibg=NONE ctermbg=NONE
   highlight NormalNC guibg=NONE ctermbg=NONE
+  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+  highlight SignColumn guibg=NONE ctermbg=NONE
+  highlight FoldColumn guibg=NONE ctermbg=NONE
+  highlight LineNr guibg=NONE ctermbg=NONE
+  highlight CursorLineNr guibg=NONE ctermbg=NONE
+  highlight StatusLine guibg=NONE ctermbg=NONE
+  highlight StatusLineNC guibg=NONE ctermbg=NONE
   highlight Conceal guibg=NONE guifg=NONE ctermbg=NONE ctermfg=NONE
 ]]
-
 -- Disable line wrap globally by default
 vim.opt.wrap = false
 
