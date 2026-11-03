@@ -103,6 +103,16 @@ vim.lsp.config("matlab_ls", {
 })
 vim.lsp.enable("matlab_ls")
 
+-- ── SystemVerilog LSP  ───────────────────────────────────────────────────
+
+vim.lsp.config("slang_server", {
+    cmd = { vim.fn.expand("~/.local/bin/slang-server") },
+    filetypes = { "verilog", "systemverilog" },
+    root_markers = { ".git" },
+})
+
+vim.lsp.enable("slang_server")
+
 -- ── Keymaps (attach per buffer when LSP connects) ─────────────────────────
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
