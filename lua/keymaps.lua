@@ -135,3 +135,23 @@ vim.keymap.set({"i", "s"}, "<C-E>", function()
 end, {silent = true})
 
 -----------------------------------------------------------------------------------------------------
+
+vim.api.nvim_create_user_command("CleanPaste", function(opts)
+    local start_line = opts.line1
+    local end_line = opts.line2
+
+    local lines = vim.api.nvim_buf_get_lines(
+        0, start_line - 1, end_line, false
+    )
+
+    local text = table.concat(lines, " ")
+    text = text:gsub("\r", " ")
+    text = text:gsub("%s+", " ")
+
+    vim.api.nvim_buf_set_lines(
+        0, start_line - 1, end_line, false, { text }
+    )
+end, {
+    range = true,
+    desc = "Clean pasted PDF text in selected lines",
+})
